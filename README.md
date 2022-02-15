@@ -2,7 +2,7 @@
 
 ProgressCLI95 but moddable. What else did you expect? Made by BurningInfern0, modding capability by CreateSource.
 
-Current Version: **0.3.100**
+Current Version: **0.3.102**
 
     *New Modding Capabilities!*
     - Ability to enable "easy game" gamemode
