@@ -5,10 +5,9 @@ import random
 from saveloader import editSystemSave, addSystemSave
 from checkbadge import calculateBadge
 from mod import addtionalFeatures
-from mod import systemList as OSList
+from mod import *
 cancelPopUp = False
 diffLevel = 1
-
 
 def wait():
     clear()
@@ -143,13 +142,14 @@ def startGame(systemName, startLevel, proLevel):
         global cancelPopUp
         # checks if lives are 0, breaks if true
                 # checks if lives are 0, breaks if true
+        style = "default on turquoise4"
         if lives <= 0:
-            rprint("[bold bright_blue]You are out of lives. Game over![/bold bright_blue]")
+            rprint("[bold bright_blue]You are out of lives. Game over![/bold bright_blue]", style=style)
             if startLevel == 1:
-                rprint('[i]A level has not been taken.[/i]')
+                rprint('[i]A level has not been taken.[/i]', style=style)
             else:
                 startLevel -= 1
-                rprint('[bold i]-1 Level[/bold i]')
+                rprint('[bold i]-1 Level[/bold i]', style=style)
                 editSystemSave(systemName, startLevel)
             lives = 3
             sleep(3)
@@ -170,7 +170,7 @@ def startGame(systemName, startLevel, proLevel):
             segEasy = random.randint(0, 11)
             if segEasy <= 3:
                 seg = 0
-                rprint(segArt[seg])
+                rprint(segArt[seg], style=style)
             elif segEasy == 3:
                 seg = 1
             elif segEasy == 4:
@@ -181,24 +181,25 @@ def startGame(systemName, startLevel, proLevel):
                 seg = 4
             elif segEasy >= 9:
                 seg = 5
-            rprint(segArt[seg])
+            rprint(segArt[seg], style=style)
         if diffLevel == 1:
             seg = random.randint(0, 5)
             for i in range(6):
                 if seg == i:
-                    rprint(segArt[i])
+                    rprint("hi", style=style)
+                    rprint(segArt[i], style=style)
 
         # green segment check
         greenseg = random.randint(0, 100)
         if greenseg == 95:
             seg = 6
-            rprint("[bright_green]╔══╗\n║$$║\n║$$║\n╚══╝[/bright_green]")
+            rprint("[bright_green]╔══╗\n║$$║\n║$$║\n╚══╝[/bright_green]", style=style)
 
         # checks if you have 1 life left
         if lives == 1:
-            rprint("You have [italic bright_red]1 life left[/italic bright_red]. Be careful.")
+            rprint("You have [italic bright_red]1 life left[/italic bright_red]. Be careful.", style=style)
         else:
-            print("You have", lives, "lives left.")
+            rprint("You have", lives, "lives left.", style=style)
 
         # checks if you have orange segments in your bar
         if progressbar2 > 0:
@@ -208,7 +209,7 @@ def startGame(systemName, startLevel, proLevel):
                     rprint("[blue][][/blue]", end='')
                 elif segment == "Orange":
                     rprint("[bright_yellow][][/bright_yellow]", end='')
-            print("\nYou have", progressbar, "% with", progressbar2, "% orange in your progressbar.")
+            print("\nYou have", progressbar, "% with", progressbar2, "% orange in your progressbar.", style=style)
         else:
             print('\nYour bar:', end='')
             for segment in bar2:
@@ -306,12 +307,12 @@ def startGame(systemName, startLevel, proLevel):
                 systemLevel = 1
                 systemLabel = "Pro"
                 print(f'{systemName} unlocked...')
-                for i in range(len(OSList)):
-                    if systemName == OSList[i]:
+                for i in range(len(pbList)):
+                    if systemName == pbList[i]:
                         try:
-                            addSystemSave(OSList[i + 1])
+                            addSystemSave(pbList[i + 1])
                         except:
-                            addSystemSave(OSList[1])
+                            addSystemSave(pbList[1])
             elif startLevel == 100:
                 print('\nExpert Label acquired!')
                 systemLevel = 2
