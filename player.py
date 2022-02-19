@@ -1,5 +1,4 @@
 from clear import clear
-from rich import print as rprint
 from rich.console import Console
 from time import sleep
 import random
@@ -7,6 +6,7 @@ from saveloader import editSystemSave, addSystemSave
 from checkbadge import calculateBadge
 from mod import addtionalFeatures
 from mod import *
+import os
 cancelPopUp = False
 diffLevel = 1
 message = ""
@@ -15,32 +15,11 @@ style = "default on turquoise4"
 width = 120
 console = Console(width=width)
 
-def fillBg():
-    global message
-    message2 = message
-    message.split("\n")
-    print(message)
-    for i in message:
-        message3 = ""
-        x = 0
-        for j in i:
-            if j == "[":
-                x += 1
-            elif j == "]" and x:
-                x -= 1
-            elif x == 0:
-                message3 += j
-        
-    print(message3)
-    message2 += " " * (width - len(message3))
-    message = message2
-
 def wait():
     global message
     clear()
     message = 'P l e a s e  w a i t . . .\n\n\n'
-    fillBg()
-    console.print(message, style=style)
+    
     sleep(3)
 
 # shutdown woohoo
@@ -48,7 +27,7 @@ def shutdown():
     global message
     wait()
     message = '[bold orange]It is now safe to close your Command Line Interface.[/bold orange]'
-    fillBg()
+    
     console.print(message, style=style)
     sleep(2)
     quit()
@@ -64,11 +43,10 @@ def beginMenu(systemname, systemlevel, systempro):
     clear()
     if systemlevel > 1:
         message = '╔════════════════════════╗\n║   B e g i n  M e n u   ║\n║    1 - Load Game       ║\n║    2 - New Game        ║\n║    3 - Restart         ║\n║    4 - Shutdown        ║\n╚════════════════════════╝'
-        fillBg()
+        
     else:
         message = '╔════════════════════════╗\n║   B e g i n  M e n u   ║\n║    1 - New Game        ║\n║    2 - Restart         ║\n║    3 - Shutdown        ║\n╚════════════════════════╝'
-        fillBg()
-    console.print(message, style=style)
+        
     choice = input()
     if choice == "1":
         if systemlevel > 1:
