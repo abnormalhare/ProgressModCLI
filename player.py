@@ -7,8 +7,12 @@ from checkbadge import calculateBadge
 from mod import addtionalFeatures
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from mod import *
 import os
+=======
+from mod import systemList as OSList
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
 from mod import systemList as OSList
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
@@ -22,6 +26,7 @@ style = "default on turquoise4"
 
 width = 120
 console = Console(width=width)
+
 
 
 
@@ -169,6 +174,7 @@ def startGame(systemName, startLevel, proLevel):
         if lives <= 0:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             console.console.print("[bold bright_blue]You are out of lives. Game over![/bold bright_blue]", style=style)
             if startLevel == 1:
                 console.console.print('[i]A level has not been taken.[/i]', style=style)
@@ -187,6 +193,14 @@ def startGame(systemName, startLevel, proLevel):
 <<<<<<< HEAD
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
+=======
+            rprint("[bold bright_blue]You are out of lives. Game over![/bold bright_blue]")
+            if startLevel == 1:
+                rprint('[i]A level has not been taken.[/i]')
+            else:
+                startLevel -= 1
+                rprint('[bold i]-1 Level[/bold i]')
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
                 editSystemSave(systemName, startLevel)
             lives = 3
@@ -210,7 +224,11 @@ def startGame(systemName, startLevel, proLevel):
                 seg = 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 console.print(segArt[seg], style=style)
+=======
+                rprint(segArt[seg])
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
                 rprint(segArt[seg])
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
@@ -229,7 +247,11 @@ def startGame(systemName, startLevel, proLevel):
                 seg = 5
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             console.print(segArt[seg], style=style)
+=======
+            rprint(segArt[seg])
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
             rprint(segArt[seg])
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
@@ -242,7 +264,11 @@ def startGame(systemName, startLevel, proLevel):
                 if seg == i:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     console.print(segArt[i], style=style)
+=======
+                    rprint(segArt[i])
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
                     rprint(segArt[i])
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
@@ -254,6 +280,7 @@ def startGame(systemName, startLevel, proLevel):
         greenseg = random.randint(0, 100)
         if greenseg == 95:
             seg = 6
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             console.print("[bright_green]╔══╗\n║$$║\n║$$║\n╚══╝[/bright_green]", style=style)
@@ -273,6 +300,8 @@ def startGame(systemName, startLevel, proLevel):
             print("You have", lives, "lives left.")
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
+=======
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
             rprint("[bright_green]╔══╗\n║$$║\n║$$║\n╚══╝[/bright_green]")
 
         # checks if you have 1 life left
@@ -280,6 +309,9 @@ def startGame(systemName, startLevel, proLevel):
             rprint("You have [italic bright_red]1 life left[/italic bright_red]. Be careful.")
         else:
             print("You have", lives, "lives left.")
+<<<<<<< HEAD
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
+=======
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 
         # checks if you have orange segments in your bar
@@ -296,6 +328,9 @@ def startGame(systemName, startLevel, proLevel):
                     rprint("[bright_yellow][][/bright_yellow]", end='')
             print("\nYou have", progressbar, "% with", progressbar2, "% orange in your progressbar.")
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
+=======
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
@@ -397,9 +432,15 @@ def startGame(systemName, startLevel, proLevel):
                 systemLabel = "Pro"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 console.print(f'{systemName} unlocked...', style=style)
                 for i in range(len(pbList)):
                     if systemName == pbList[i]:
+=======
+                print(f'{systemName} unlocked...')
+                for i in range(len(OSList)):
+                    if systemName == OSList[i]:
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
                 print(f'{systemName} unlocked...')
                 for i in range(len(OSList)):

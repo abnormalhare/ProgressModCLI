@@ -7,6 +7,7 @@ from time import sleep
 import sys
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from player import beginMenu
 from mod import *
 import re
@@ -17,11 +18,16 @@ message = ""
 =======
 =======
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
+=======
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 from mod import systemList, proList
 from player import startGame, beginMenu, pauseBeginMenu
 
 # compressed code helps make game much more expandable/moddable
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
+=======
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
 >>>>>>> parent of 33673a8 (UNFINISHED SAVE)
@@ -76,6 +82,7 @@ def boot():
     clear()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     message = 'MiniChipOS ver. 0.59 - [bright_yellow]Codename Cookie Monster[/bright_yellow]'
     style = "default on dark_blue"
@@ -94,6 +101,20 @@ def boot():
             message = f"[#00bb00]{i + 1}. {stri} {badge}[/#00bb00]"
             fillBg()
             console.print(message, style=style)
+=======
+    rprint('MiniChipOS ver. 0.56 - [bright_yellow]Codename Nubo[/bright_yellow]')
+    print('Ver. 12-30-2021\n\n')
+    
+    for i in range(len(systemList)):
+        stri = systemList[i]
+        stri1 = systemList[i - 1]
+        save = loadSystemSave(stri)
+        if save == False:
+            rprint(f'[red]{i + 1}. {stri} - Get to level {proList[i - 1]} in {stri1} to unlock this![/red]')
+        else:
+            badge = calculateBadge(save, proList[i])
+            print(f"{i + 1}. {stri}", badge)
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 =======
     rprint('MiniChipOS ver. 0.56 - [bright_yellow]Codename Nubo[/bright_yellow]')
     print('Ver. 12-30-2021\n\n')
