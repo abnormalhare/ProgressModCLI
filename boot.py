@@ -5,6 +5,7 @@ from clear import clear
 from checkbadge import calculateBadge
 from time import sleep
 import sys
+<<<<<<< HEAD
 from player import beginMenu
 from mod import *
 import re
@@ -12,6 +13,12 @@ import re
 width = 120
 console = Console(width=width)
 message = ""
+=======
+from mod import systemList, proList
+from player import startGame, beginMenu, pauseBeginMenu
+
+# compressed code helps make game much more expandable/moddable
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 
 # systems
 sys.path.insert(0, './oses/')
@@ -40,28 +47,19 @@ def launch(systemOS, systemlevel, systembadge, systempro):
     beginMenu(systemOS, systemlevel, systempro)
 
 def startup(system):
-    stri = pbList[int(system) - 1]
+    # string from mod.py
+    stri = systemList[int(system) - 1]
+    # originally "level95", "check95plus", etc
     level = loadSystemSave(stri)
-    pro = pbProList[int(system) - 1]
+    # removes "necessity" for each os to have a separate pro variable, mod.py
+    pro = proList[int(system) - 1]
+    # originally "badge95", etc
     badge = calculateBadge(level, pro)
     if level == False:
         boot()
     launch(stri, level, badge, pro)
-
-def comp():
-    detectSave()
-    clear()
-    rprint('MiniChipOS ver. 0.59 - [bright_yellow]Codename Cookie Monster[/bright_yellow]')
-    print('Ver. 12-30-2021\n\n')
-    rprint("[blue]Choose your system.[/blue]")
-    if loadSystemSave("BarOS 1"):
-        rprint("[green]1.Progress Computer\n2. Progresh[/green]")
-    else:
-        rprint("[green]1. Progress Computer[/green]\n[red]2. Progresh[/red]")
-    choice = input()
-    boot(choice)
-
-def boot(choice):
+    
+def boot():
 
     detectSave()
 
@@ -70,6 +68,7 @@ def boot(choice):
     global message
 
     clear()
+<<<<<<< HEAD
 
     message = 'MiniChipOS ver. 0.59 - [bright_yellow]Codename Cookie Monster[/bright_yellow]'
     style = "default on dark_blue"
@@ -88,10 +87,22 @@ def boot(choice):
             message = f"[#00bb00]{i + 1}. {stri} {badge}[/#00bb00]"
             fillBg()
             console.print(message, style=style)
-
-
+=======
+    rprint('MiniChipOS ver. 0.56 - [bright_yellow]Codename Nubo[/bright_yellow]')
+    print('Ver. 12-30-2021\n\n')
+    
+    for i in range(len(systemList)):
+        stri = systemList[i]
+        stri1 = systemList[i - 1]
+        save = loadSystemSave(stri)
+        if save == False:
+            rprint(f'[red]{i + 1}. {stri} - Get to level {proList[i - 1]} in {stri1} to unlock this![/red]')
+        else:
+            badge = calculateBadge(save, proList[i])
+            print(f"{i + 1}. {stri}", badge)
+>>>>>>> parent of 33673a8 (UNFINISHED SAVE)
 
     choice = input()
     startup(choice)
 
-comp()
+boot()
