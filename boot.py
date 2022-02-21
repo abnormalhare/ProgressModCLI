@@ -1,18 +1,17 @@
 from saveloader import detectSave, loadSystemSave
-from rich import print as rprint
+from rich.console import Console
 from clear import clear
 from checkbadge import calculateBadge
 from time import sleep
 import sys
-<<<<<<< HEAD
 from mod import systemList, proList
 from player import startGame, beginMenu, pauseBeginMenu
 
 # compressed code helps make game much more expandable/moddable
-=======
-from player import beginMenu
-from mod import *
->>>>>>> parent of bf87baf (code is a bit more finished, but still buggy)
+
+width = 120
+console = Console(width=width)
+style = "default on default"
 
 # systems
 sys.path.insert(0, './oses/')
@@ -45,34 +44,19 @@ def boot():
     global currentSystem
 
     clear()
-<<<<<<< HEAD
-    rprint('MiniChipOS ver. 0.56 - [bright_yellow]Codename Nubo[/bright_yellow]')
-    print('Ver. 12-30-2021\n\n')
+
+    console.print('MiniChipOS ver. 0.59 - [bright_yellow]Codename Cookie Monster[/bright_yellow]', style=style)
+    console.print('Ver. 12-30-2021\n\n', style=style)
     
     for i in range(len(systemList)):
         stri = systemList[i]
         stri1 = systemList[i - 1]
         save = loadSystemSave(stri)
         if save == False:
-            rprint(f'[red]{i + 1}. {stri} - Get to level {proList[i - 1]} in {stri1} to unlock this![/red]')
+            console.print(f'[red]{i + 1}. {stri} - Get to level {proList[i - 1]} in {stri1} to unlock this![/red]', style=style)
         else:
             badge = calculateBadge(save, proList[i])
-            print(f"{i + 1}. {stri}", badge)
-=======
-    rprint('MiniChipOS ver. 0.59 - [bright_yellow]Codename Cookie Monster[/bright_yellow]')
-    print('Ver. 12-30-2021\n\n')
-    for i in range(len(pbList)):
-        stri = pbList[i]
-        stri1 = pbList[i - 1]
-        save = loadSystemSave(stri)
-        if save == False:
-            rprint(f'[red]{i + 1}. {stri} - Get to level {pbProList[i - 1]} in {stri1} to unlock this![/red]')
-        else:
-            badge = calculateBadge(save, pbProList[i])
-            print(f"{i + 1}. {stri}", badge)
-
-
->>>>>>> parent of bf87baf (code is a bit more finished, but still buggy)
+            console.print(f"[green]{i + 1}. {stri}[/green]", badge, style=style)
 
     choice = input()
     startup(choice)
