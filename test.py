@@ -1,1 +1,0 @@
-import turtlewn=turtle.Screen()wn.bgcolor("black")wn.title("This is my screen title!")x = input()
