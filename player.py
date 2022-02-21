@@ -336,10 +336,10 @@ def startGame(systemName, startLevel, proLevel):
                 systemLabel = "Adept"
             elif startLevel == 1000:
                 console.print('\nGrand Label acquired!', style=style)
-            elif startLevel == 2147483647:
-                console.print('\nWhat?', style=style)
                 systemLevel = 5
                 systemLabel = "Grand"
+            elif startLevel == 2147483647:
+                console.print('\nWhat?', style=style)
             bar = []
             bar2 = []
             bardisplay = ""
