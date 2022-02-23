@@ -2,8 +2,8 @@ from saveloader import detectSave, loadSystemSave
 from rich.console import Console
 from time import sleep
 import sys
-from mod import systemList, proList, calculateBadge
-from player import startGame, beginMenu, pauseBeginMenu, clear
+from mod import systemList, proList, calculateBadge, clear
+from player import startGame, beginMenu, pauseBeginMenu
 
 # compressed code helps make game much more expandable/moddable
 

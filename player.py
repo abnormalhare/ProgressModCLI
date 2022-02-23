@@ -3,17 +3,10 @@ from time import sleep
 import random
 import os
 from saveloader import editSystemSave, addSystemSave
-from mod import addtionalFeatures, bgColor, style, calculateBadge
+from mod import addtionalFeatures, bgColor, style, calculateBadge, clear
 from mod import systemList as OSList
-from os import name, system
 cancelPopUp = False
 diffLevel = 1
-
-def clear():
-    if name == "nt":
-        _ = system('cls')
-    else:
-        _ = system('clear')
 
 width = 120
 console = Console(width=120)
@@ -289,7 +282,7 @@ def startGame(systemName, startLevel, proLevel):
             if tupni == "1":
                 continue
             elif tupni == "2":
-                pauseBeginMenu(systemName, proLevel)
+                beginMenu(systemName, systemLevel, proLevel)
             elif tupni == "3":
                 wait()
                 from boot import boot
@@ -361,8 +354,11 @@ def startGame(systemName, startLevel, proLevel):
             segments = ""
             progressbar = 0
             progressbar2 = 0
-            console.print('\nPress ENTER to play another level.', style=style)
-            input()
-        continue
+            console.print('\n "m" to go to menu, ENTER to play another level', style=style)
+            catch = input()
+            if catch == "m":
+                beginMenu(systemName, systemLevel, proLevel)
+            else:
+                continue
 
 os.system("color 07")

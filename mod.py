@@ -1,9 +1,9 @@
 from rich import print as rprint
-from clear import clear
+from os import name, system
 
 systemList = ["PB-DOS Shell", "Progressbar 1", "Progressbar 2", "Progressbar 3.14", "Progressbar NOT 3.60", "Progressbar 95", "Progressbar 95 Plus", "Progressbar NOT 4.0", "Progressbar 98", "Progressbar 2000", "Progressbar Meme", "Progressbar XB", "Progressbar Wista", "Progressbar 7", "Progressbar 81", "Progressbar 10", "Progressbar 1X", "Progressbar 11"]
 proList = [10, 10, 10, 10, 10, 10, 20, 30, 20, 30, 30, 30, 40, 40, 50, 50, 60, 60]
-bgColor = 'setterm -background blue -store'
+bgColor = "color 10"
 style = "default on blue"
 
 def addtionalFeatures(systemname):
@@ -41,3 +41,10 @@ def calculateBadge(level, proLevel):
         return ""
     else:
         return "Calculation error."
+
+### DO NOT CHANGE, USED FOR CLEARING SCREEN ###
+def clear():
+    if name == "nt":
+        _ = system('cls')
+    else:
+        _ = system('clear')
