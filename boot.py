@@ -1,11 +1,9 @@
 from saveloader import detectSave, loadSystemSave
 from rich.console import Console
-from clear import clear
-from checkbadge import calculateBadge
 from time import sleep
 import sys
-from mod import systemList, proList
-from player import startGame, beginMenu, pauseBeginMenu
+from mod import systemList, proList, calculateBadge
+from player import startGame, beginMenu, pauseBeginMenu, clear
 
 # compressed code helps make game much more expandable/moddable
 
@@ -25,13 +23,9 @@ def launch(systemOS, systemlevel, systembadge, systempro):
     beginMenu(systemOS, systemlevel, systempro)
 
 def startup(system):
-    # string from mod.py
     stri = systemList[int(system) - 1]
-    # originally "level95", "check95plus", etc
     level = loadSystemSave(stri)
-    # removes "necessity" for each os to have a separate pro variable, mod.py
     pro = proList[int(system) - 1]
-    # originally "badge95", etc
     badge = calculateBadge(level, pro)
     if level == False:
         boot()

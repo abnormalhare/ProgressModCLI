@@ -1,14 +1,19 @@
-from clear import clear
 from rich.console import Console
 from time import sleep
 import random
 import os
 from saveloader import editSystemSave, addSystemSave
-from checkbadge import calculateBadge
-from mod import addtionalFeatures, bgColor, style
+from mod import addtionalFeatures, bgColor, style, calculateBadge
 from mod import systemList as OSList
+from os import name, system
 cancelPopUp = False
 diffLevel = 1
+
+def clear():
+    if name == "nt":
+        _ = system('cls')
+    else:
+        _ = system('clear')
 
 width = 120
 console = Console(width=120)
