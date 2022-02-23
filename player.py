@@ -15,6 +15,7 @@ console = Console(width=120)
 
 def wait():
     clear()
+    os.system(bgColor)
     console.print('P l e a s e  w a i t . . .\n\n\n', style=style)
     sleep(3)
 
@@ -68,6 +69,7 @@ def beginMenu(systemname, systemlevel, systempro):
 # Begin menu during gameplay
 def pauseBeginMenu(systemName, systemPro):
     clear()
+    os.system(bgColor)
     console.print('╔════════════════════════╗\n║   B e g i n  M e n u   ║\n║    1 - Resume          ║\n║    2 - New Game        ║\n║    3 - Restart         ║\n║    4 - Shutdown        ║\n╚════════════════════════╝\n', style=style)
     choice = input()
     if choice == "1":
@@ -172,7 +174,9 @@ def startGame(systemName, startLevel, proLevel):
             console.print('<', systemLabel, '>', style=style)
 
         # randomly chooses a segment and loads art
-        segArt = ["[dark_blue]╔══╗\n║  ║\n║  ║\n╚══╝[/dark_blue]", "[bright_red]╔══╗\n║!!║\n║!!║\n╚══╝[/bright_red]", "[bright_magenta]╔══╗\n║--║\n║--║\n╚══╝[/bright_magenta]", "[bright_yellow]╔══╗\n║~~║\n║~~║\n╚══╝[/bright_yellow]", "[bright_black]╔══╗\n║..║\n║..║\n╚══╝[/bright_black]", "[bright_cyan]╔══╗\n║**║\n║**║\n╚══╝[/bright_cyan]"]
+        segArt = "╔══╗\n║  ║\n║  ║\n╚══╝"
+        segStyle = ["dark_blue on dark_blue", "bright_red on bright_red", "bright_magenta on bright_magenta", "bright_yellow on bright_yellow", "bright_black on bright_black", "bright_cyan on bright_cyan", "bright_green on bright_green"]
+        
         if diffLevel == 0:
             segEasy = random.randint(0, 11)
             if segEasy <= 3:
@@ -188,18 +192,14 @@ def startGame(systemName, startLevel, proLevel):
                 seg = 4
             elif segEasy >= 9:
                 seg = 5
-            console.print(segArt[seg], style=style)
         if diffLevel == 1:
             seg = random.randint(0, 5)
-            for i in range(6):
-                if seg == i:
-                    console.print(segArt[i], style=style)
 
         # green segment check
         greenseg = random.randint(0, 100)
         if greenseg == 95:
             seg = 6
-            console.print("[bright_green]╔══╗\n║$$║\n║$$║\n╚══╝[/bright_green]", style=style)
+        console.print(segArt, style=segStyle[seg])
 
         # checks if you have 1 life left
         if lives == 1:
@@ -224,7 +224,7 @@ def startGame(systemName, startLevel, proLevel):
             console.print("\nYou have", progressbar,"%", "in your progressbar.", style=style)
 
         # catches the currently displayed segment
-        console.print("Type 'c' to catch, any other key to move away, and 'q' to quit.\n", style=style)
+        console.print("Type 'c' to catch, 'enter' to move away, and 's' to open settings\n", style=style)
         catch = input()
 
         # calculates which segment you caught and does stuff
@@ -276,10 +276,23 @@ def startGame(systemName, startLevel, proLevel):
                 progressbar2 = 0
                 score += 100
 
-        elif catch == "q":
-            console.print('Game Over! Thanks for playing!', style=style)
-            sleep(3)
-            beginMenu(systemName, startLevel, proLevel)
+        elif catch == "settings" or catch == "s":
+            clear()
+            os.system(bgColor)
+            console.print("╔════════════════════════╗\n║   P a u s e  M e n u   ║\n║    1 - Back            ║\n║    2 - Replay          ║\n║    3 - Restart         ║\n║    4 - Shutdown        ║\n╚════════════════════════╝\n", style=style)
+            tupni = input()
+            if tupni == "1":
+                continue
+            elif tupni == "2":
+                pauseBeginMenu(systemName, proLevel)
+            elif tupni == "3":
+                wait()
+                from boot import boot
+                boot()
+            elif tupni == "4":
+                shutdown()
+            else:
+                continue
 
         elif catch == "credits":
             clear()
@@ -290,9 +303,6 @@ def startGame(systemName, startLevel, proLevel):
             console.print('Made for use with Sparrow Assistant by pivinx1', style=style)
             console.print('\nPress ENTER to get back to the game.', style=style)
             input()
-
-        elif catch == "beginmenu":
-            pauseBeginMenu(systemName, proLevel)
 
         # if you have 100% on your progressbar, the game will end.
         if progressbar >= 100:
