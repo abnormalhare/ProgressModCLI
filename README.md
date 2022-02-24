@@ -2,7 +2,7 @@
 
 ProgressCLI95 but moddable. What else did you expect? Made by BurningInfern0, modding capability by CreateSource.
 
-Current Version: **0.3.120**
+Current Version: **0.3.122**
 
 - Added Color inside blocks (aka pixels)!
 - Added settings menu

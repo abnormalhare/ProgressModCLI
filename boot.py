@@ -39,7 +39,7 @@ def boot():
 
     clear()
 
-    console.print('MiniChipOS ver. 0.59 - [bright_yellow]Codename Cookie Monster[/bright_yellow]', style=style)
+    console.print('MiniChipOS ver. 0.61 - [bright_yellow]Codename TRHR[/bright_yellow]', style=style)
     console.print('Ver. 12-30-2021\n\n', style=style)
     
     for i in range(len(systemList)):
