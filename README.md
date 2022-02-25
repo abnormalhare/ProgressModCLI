@@ -18,4 +18,3 @@ Dependencies: ```rich```
 2. Open your terminal/command prompt inside the extracted contents.
 3. Make sure the depenencies have been met.
 4. Simply do ```python boot.py```
-Note: "Lin" Zip files are for Linux and Mac

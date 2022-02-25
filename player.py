@@ -108,7 +108,6 @@ def startGame(systemName, startLevel, proLevel):
     global progressbar # total progressbar progress
     global progressbar2 # total orange segments in progressbar
     global lives
-    global score
     global bar # array that contains segments for the progressbar
     global bar2 # contents in bar that are used to calculate pink segments
     global bardisplay # bar[] contents are displayed on screen
@@ -120,7 +119,6 @@ def startGame(systemName, startLevel, proLevel):
     progressbar = 0
     progressbar2 = 0
     lives = 3
-    score = 0
     bar = []
     bar2 = []
     bardisplay = ""
@@ -206,20 +204,15 @@ def startGame(systemName, startLevel, proLevel):
             console.print("You have", lives, "lives left.", style=style)
 
         # checks if you have orange segments in your bar
-        if progressbar2 > 0:
-            console.print('\nYour bar:', end='', style=style)
-            for segment in bar2:
-                if segment == "Blue":
-                    console.print("[blue][][/blue]", end='', style=style)
-                elif segment == "Orange":
-                    console.print("[bright_yellow][][/bright_yellow]", end='', style=style)
-            console.print("\nYou have", progressbar, "% with", progressbar2, "% orange in your progressbar.", style=style)
-        else:
-            console.print('\nYour bar:', end='', style=style)
-            for segment in bar2:
-                if segment == "Blue":
-                    console.print("[blue][][/blue]", end='', style=style)
-            console.print("\nYou have", progressbar,"%", "in your progressbar.", style=style)
+        msg = f"\nYou have {progressbar}% in your progressbar"
+        console.print('\nYour bar:', end='', style=style)
+        for segment in bar2:
+            if segment == "Blue":
+                console.print("[blue][][/blue]", end='', style=style)
+            elif segment == "Orange":
+                console.print("[bright_yellow][][/bright_yellow]", end='', style=style)
+                msg = f"\nYou have {progressbar}% with {progressbar2}% orange in your progressbar"
+            console.print(msg, style=style)
 
         # catches the currently displayed segment
         console.print("Type 'c' to catch, 'enter' to move away, and 's' to open settings\n", style=style)
@@ -230,7 +223,6 @@ def startGame(systemName, startLevel, proLevel):
             if seg == 0:
                 progressbar += 5
                 bar2.append("Blue")
-                score += 5
             elif seg == 1:
                 bar = []
                 bar2 = []
@@ -238,19 +230,13 @@ def startGame(systemName, startLevel, proLevel):
                 lives = lives - 1
                 progressbar = 0
                 progressbar2 = 0
-                score -= 10
             elif seg == 2:
                 if progressbar == 0:
                     continue
                 if bar2[-1] == "Orange":
                     progressbar2 -= 5
-                    progressbar -= 5
-                    bar2.pop(-1)
-                    score += 5
-                else:
-                    progressbar -= 5
-                    bar2.pop(-1)
-                    score += 5
+                progressbar -= 5
+                bar2.pop(-1)
             elif seg == 3:
                 progressbar += 5
                 progressbar2 += 5
@@ -263,16 +249,13 @@ def startGame(systemName, startLevel, proLevel):
                     progressbar += 10
                     for i in range(2):
                         bar2.append("Blue")
-                    score += 10
                 else:
                     progressbar += 15
                     for i in range(3):
                         bar2.append("Blue")
-                    score += 15
             elif seg == 6:
                 progressbar = 100
                 progressbar2 = 0
-                score += 100
 
         elif catch == "settings" or catch == "s":
             clear()
@@ -319,7 +302,6 @@ def startGame(systemName, startLevel, proLevel):
             startLevel += 1
             editSystemSave(systemName, startLevel)
             if startLevel == proLevel:
-                console.print('\nCongratulations! You are the Professional!', style=style)
                 console.print('Pro Label acquired!', style=style)
                 systemLevel = 1
                 systemLabel = "Pro"
