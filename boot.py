@@ -1,17 +1,16 @@
-from saveloader import detectSave, loadSystemSave
+############## PLEASE DO NOT SELL ##############
+
 from rich.console import Console
 from time import sleep
 import sys
+from saveloader import detectSave, loadSystemSave
 from mod import systemList, proList, calculateBadge, clear
 from player import startGame, beginMenu, pauseBeginMenu
-
-# compressed code helps make game much more expandable/moddable
 
 width = 120
 console = Console(width=width)
 style = "default on default"
 
-# systems
 sys.path.insert(0, './oses/')
 
 def launch(systemOS, systemlevel, systembadge, systempro):

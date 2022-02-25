@@ -150,9 +150,7 @@ def startGame(systemName, startLevel, proLevel):
                 # checks if lives are 0, breaks if true
         if lives <= 0:
             console.print("[bold bright_blue]You are out of lives. Game over![/bold bright_blue]")
-            if startLevel == 1:
-                console.print('[i]A level has not been taken.[/i]', style=style)
-            else:
+            if startLevel != 1:
                 startLevel -= 1
                 console.print('[bold i]-1 Level[/bold i]', style=style)
                 editSystemSave(systemName, startLevel)
