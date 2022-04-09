@@ -1,10 +1,16 @@
 from rich import print as rprint
 from os import name, system
 
+# list of systems
 systemList = ["PB-DOS Shell", "Progressbar 1", "Progressbar 2", "Progressbar 3.14", "Progressbar NOT 3.60", "Progressbar 95", "Progressbar 95 Plus", "Progressbar NOT 4.0", "Progressbar 98", "Progressbar 2000", "Progressbar Meme", "Progressbar XB", "Progressbar Wista", "Progressbar 7", "Progressbar 81", "Progressbar 10", "Progressbar 1X", "Progressbar 11"]
+#list of pro label level amnts, must corresp\ond with systemList
 proList = [10, 10, 10, 10, 10, 10, 20, 30, 20, 30, 30, 30, 40, 40, 50, 50, 60, 60]
-bgColor = "color 10" # windows, you may have a different way to set backgrounds
-style = "default on blue"
+if name == "nt":
+    bgColor = "color 10" # for windows
+else:
+    bgColor = "setterm 10 -term linux -back blue" # for linux
+
+style = "default on blue" # for background of text
 
 def addtionalFeatures(systemname):
     global diffLevel
