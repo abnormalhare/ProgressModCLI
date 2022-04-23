@@ -38,8 +38,8 @@ def boot():
 
     clear()
 
-    console.print('MiniChipOS ver. 0.61 - [bright_yellow]Codename TRHR[/bright_yellow]', style=style)
-    console.print('Ver. 12-30-2021\n\n', style=style)
+    console.print('MiniChipOS ver. 0.63 - [bright_yellow]Codename CharPoint[/bright_yellow]', style=style)
+    console.print('Ver. 2322\n\n', style=style)
     
     for i in range(len(systemList)):
         stri = systemList[i]

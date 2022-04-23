@@ -106,21 +106,17 @@ def spawnPopup(startLevel, systemLabel):
 
 def startGame(systemName, startLevel, proLevel):
     global progressbar # total progressbar progress
-    global progressbar2 # total orange segments in progressbar
     global lives
     global bar # array that contains segments for the progressbar
-    global bar2 # contents in bar that are used to calculate pink segments
     global bardisplay # bar[] contents are displayed on screen
     global segments # used in conjunction with bardisplay
     global systemLabel # current system label
     global systemLevel # current system level (used with systemLabel)
 
     # setting global variables
-    progressbar = 0
-    progressbar2 = 0
+    progressbar = [0, 0, 0, 0]
     lives = 3
     bar = []
-    bar2 = []
     bardisplay = ""
     segments = ""
 
@@ -197,20 +193,15 @@ def startGame(systemName, startLevel, proLevel):
 
         # checks if you have 1 life left
         if lives == 1:
-            console.print("You have [italic bright_red]1 life left[/italic bright_red]. Be careful.", style=style)
+            console.print("You have [italic bright_red]1 life left[/italic bright_red].", style=style)
         else:
             console.print("You have", lives, "lives left.", style=style)
 
-        # checks if you have orange segments in your bar
-        msg = f"\nYou have {progressbar}% in your progressbar"
-        console.print('\nYour bar:', end='', style=style)
-        for segment in bar2:
-            if segment == "Blue":
-                console.print("[blue][][/blue]", end='', style=style)
-            elif segment == "Orange":
-                console.print("[bright_yellow][][/bright_yellow]", end='', style=style)
-                msg = f"\nYou have {progressbar}% with {progressbar2}% orange in your progressbar"
-            console.print(msg, style=style)
+        # outputs bar
+        x = ""
+        for i in bar:
+            x += i
+        console.print(f'\nYour bar: {x}')
 
         # catches the currently displayed segment
         console.print("Type 'c' to catch, 'enter' to move away, and 's' to open settings\n", style=style)
@@ -218,42 +209,43 @@ def startGame(systemName, startLevel, proLevel):
 
         # calculates which segment you caught and does stuff
         if catch == "c":
+            if seg != 2 and progressbar[2] > 0 or seg != 4 and progressbar[3] > 0:
+                progressbar = [0, 0, 0, 0]
+                bar = []
             if seg == 0:
-                progressbar += 5
-                bar2.append("Blue")
+                progressbar[0] += 5
+                progressbar[2] = 0
+                bar.append("[blue][][/blue]")
             elif seg == 1:
                 bar = []
-                bar2 = []
                 bardisplay = ""
                 lives = lives - 1
-                progressbar = 0
-                progressbar2 = 0
+                progressbar = [0, 0, 0, 0]
             elif seg == 2:
-                if progressbar == 0:
-                    continue
-                if bar2[-1] == "Orange":
-                    progressbar2 -= 5
-                progressbar -= 5
-                bar2.pop(-1)
+                if progressbar[0] == 0 and progressbar[1] == 0:
+                    progressbar[2] += 5
+                    bar.append("[bright_magenta][][/bright_magenta]")
+                elif bar[-1] == "[bright_yellow][][/bright_yellow]":
+                    progressbar[1] -= 5
+                else:
+                    progressbar[0] -= 5
+                bar.pop(-1)
             elif seg == 3:
-                progressbar += 5
-                progressbar2 += 5
-                bar2.append("Orange")
+                progressbar[1] += 5
+                bar.append("[bright_yellow][][/bright_yellow]")
             elif seg == 4:
+                if progressbar[0] == 0 and progressbar[1] == 0:
+                    progressbar[3] += 5
+                    bar.append("[grey1][][/grey1]")
                 continue
             elif seg == 5:
                 bonus = random.randint(0, 1)
-                if bonus == 0:
-                    progressbar += 10
-                    for i in range(2):
-                        bar2.append("Blue")
-                else:
-                    progressbar += 15
-                    for i in range(3):
-                        bar2.append("Blue")
+                for i in range(2 + bonus):
+                    progressbar[0] += 5
+                    bar.append("[blue][][/blue]")
             elif seg == 6:
-                progressbar = 100
-                progressbar2 = 0
+                progressbar[0] = 100
+                progressbar[1] = 0
 
         elif catch == "settings" or catch == "s":
             clear()
@@ -275,7 +267,7 @@ def startGame(systemName, startLevel, proLevel):
 
         elif catch == "credits":
             clear()
-            console.print('ProgressCLI95 0.2.2 Release', style=style)
+            console.print('ProgressModCLI Version 0.3.2', style=style)
             console.print('Original code (0.1) by Setapdede', style=style)
             console.print('Improved code (0.2-0.2.2) by BurningInfern0', style=style)
             console.print('Moddable code (0.3+) by CreateSource/AbnormalHare', style=style)
@@ -284,19 +276,23 @@ def startGame(systemName, startLevel, proLevel):
             input()
 
         # if you have 100% on your progressbar, the game will end.
-        if progressbar >= 100:
+        if progressbar[0] + progressbar[1] >= 100 or progressbar[3] >= 100 or progressbar[2] >= 100:
             clear()
             os.system(bgColor)
-            if progressbar2 > 0:
+            if progressbar[1] > 0:
                 console.print('Bravo!', style=style)
-            elif progressbar >= 100 and progressbar2 == 0:
+            elif progressbar[0] >= 100 and progressbar[1] == 0:
                 console.print('Perfect!', style=style)
-            elif progressbar > 100:
+            elif progressbar[0] > 100:
                 console.print('Outer space!', style=style)
-            if progressbar == 50 and progressbar2 == 50:
-                console.print ('Yin and yang', style=style)
-            if progressbar == 0 and progressbar2 == 100:
-                console.print ("Nonconformist!", style=style)
+            if progressbar[0] == 50 and progressbar[1] == 50:
+                console.print('Yin and yang', style=style)
+            if progressbar[0] == 0 and progressbar[1] == 100:
+                console.print("Nonconformist!", style=style)
+            if progressbar[2] >= 100:
+                console.print("Pink is the New Blue", style=style)
+            if progressbar[3] >= 100:
+                console.print("NULL", style=style)
             startLevel += 1
             editSystemSave(systemName, startLevel)
             if startLevel == proLevel:
@@ -329,14 +325,12 @@ def startGame(systemName, startLevel, proLevel):
             elif startLevel == 2147483647:
                 console.print('\nWhat?', style=style)
             bar = []
-            bar2 = []
             bardisplay = ""
             segments = ""
-            progressbar = 0
-            progressbar2 = 0
+            progressbar = [0, 0, 0, 0]
             console.print('\n "m" to go to menu, ENTER to play another level', style=style)
             catch = input()
-            if catch == "m":
+            if catch.lower() == "m":
                 beginMenu(systemName, systemLevel, proLevel)
             else:
                 continue
